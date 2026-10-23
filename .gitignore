@@ -1,0 +1,4 @@
+# Planilhas geradas localmente (vão para os releases) e arquivos temporários
+*.xlsx
+*.tmp
+__pycache__/

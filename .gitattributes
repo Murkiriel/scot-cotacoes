@@ -1,0 +1,5 @@
+# Os CSVs são gravados pelo script com fim de linha CRLF (padrão do módulo csv) em
+# qualquer sistema. O git não deve convertê-los; senão cada coleta no GitHub Actions
+# (Linux) regravaria os arquivos inteiros só pelo fim de linha.
+*.csv -text
+*.json text eol=lf

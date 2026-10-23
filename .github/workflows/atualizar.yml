@@ -1,0 +1,98 @@
+name: Atualizar dados
+
+on:
+  schedule:
+    # A Scot publica a cotação de cada dia de madrugada (entre ~22h30 e ~6h25) e o site
+    # só mostra a mais recente: um dia sem nenhuma coleta bem-sucedida se perde. Por isso
+    # há quatro coletas por dia (o site às vezes não responde aos servidores do GitHub):
+    # 07h, 10h, 14h e 19h de Brasília (10h, 13h, 17h e 22h UTC).
+    - cron: "0 10,13,17,22 * * *"
+  workflow_dispatch:
+    inputs:
+      argumentos:
+        description: "Argumentos extras do script (ex.: --paginas boi-gordo reposicao)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-dados
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Coletar cotações da Scot
+        id: coleta
+        env:
+          ARGUMENTOS: ${{ github.event.inputs.argumentos }}
+        run: |
+          # Páginas com erro não impedem a gravação das demais; o resultado é tratado no fim.
+          python scot_cotacoes.py $ARGUMENTOS || echo "codigo=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Gravar dados no repositório
+        id: gravar
+        run: |
+          # Commits em nome do dono do repositório (e-mail anônimo do GitHub), não do robô.
+          git config user.name "Murkiriel"
+          git config user.email "14956419+Murkiriel@users.noreply.github.com"
+          git add dados
+          if git diff --cached --quiet; then
+            echo "Nada novo para gravar."
+          else
+            git commit -m "Dados: atualização $(TZ=America/Sao_Paulo date +%F\ %H:%M)"
+            git pull --rebase --autostash
+            git push
+            echo "mudou=1" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publicar release da última cotação
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MUDOU: ${{ steps.gravar.outputs.mudou }}
+        run: |
+          python notas_release.py notas.md > release.txt
+          tag="$(sed -n 's/^tag=//p' release.txt)"
+          titulo="$(sed -n 's/^titulo=//p' release.txt)"
+          arquivos="scot_cotacoes.xlsx $(ls dados/scot_cotacoes_*.csv)"
+          if gh release view "$tag" > /dev/null 2>&1; then
+            # O release da data já existe: só troca os arquivos e as notas quando os dados
+            # mudaram (outro grupo publicado depois ou tabela revisada pela Scot).
+            if [ "$MUDOU" = "1" ]; then
+              gh release upload "$tag" $arquivos --clobber
+              gh release edit "$tag" --title "$titulo" --notes-file notas.md
+              echo "Release $tag atualizado."
+            else
+              echo "Release $tag já está em dia."
+            fi
+          else
+            gh release create "$tag" $arquivos --title "$titulo" --notes-file notas.md \
+              --target "$(git rev-parse HEAD)" --latest
+            echo "Release $tag criado."
+          fi
+
+      - name: Avisar páginas com erro
+        if: steps.coleta.outputs.codigo == '1'
+        run: |
+          # Falha passageira (o site não respondeu): a próxima coleta tenta de novo.
+          echo "::warning::Alguma página da Scot não pôde ser lida; veja o log da etapa 'Coletar cotações da Scot'."
+
+      - name: Sinalizar atraso
+        if: steps.coleta.outputs.codigo != '' && steps.coleta.outputs.codigo != '1'
+        run: |
+          echo "::error::Algum grupo está há dias sem data nova (site fora do ar ou layout mudou); veja o log da etapa 'Coletar cotações da Scot'."
+          exit 1
