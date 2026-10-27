@@ -3,10 +3,11 @@ name: Atualizar dados
 on:
   schedule:
     # A Scot publica a cotação de cada dia de madrugada (entre ~22h30 e ~6h25) e o site
-    # só mostra a mais recente: um dia sem nenhuma coleta bem-sucedida se perde. Por isso
-    # há quatro coletas por dia (o site às vezes não responde aos servidores do GitHub):
-    # 07h, 10h, 14h e 19h de Brasília (10h, 13h, 17h e 22h UTC).
-    - cron: "0 10,13,17,22 * * *"
+    # só mostra a mais recente: um dia sem nenhuma coleta bem-sucedida se perde. O firewall
+    # da Scot às vezes bloqueia o servidor do GitHub da vez, e o GitHub atrasa ou pula
+    # execuções agendadas (mais nas horas cheias). Por isso são oito coletas por dia, a cada
+    # 2 horas, das 07h17 às 21h17 de Brasília (10h17 a 00h17 UTC).
+    - cron: "17 0,10,12,14,16,18,20,22 * * *"
   workflow_dispatch:
     inputs:
       argumentos:

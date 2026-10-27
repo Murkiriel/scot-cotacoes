@@ -41,6 +41,7 @@ import argparse
 import collections
 import csv
 import datetime as dt
+import http.client
 import json
 import re
 import sys
@@ -79,7 +80,13 @@ USER_AGENT = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
               '(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36')
 TENTATIVAS = 4
 ESPERA_INICIAL_S = 10
-PAUSA_ENTRE_PAGINAS_S = 1
+PAUSA_ENTRE_PAGINAS_S = 3
+
+
+class Bloqueado(Exception):
+    """O site recusou o acesso (HTTP 403 ou conexão derrubada): o firewall da Scot às vezes
+    bloqueia o endereço de um servidor do GitHub. Insistir piora; a próxima coleta (outro
+    servidor) tenta de novo."""
 # Dias corridos sem data nova a partir dos quais o grupo é dado como atrasado (o
 # site caiu de vez ou mudou o layout). Folga para fins de semana e feriados.
 ATRASO_MAXIMO_DIAS = 5
@@ -183,13 +190,19 @@ def baixar(pagina: str, timeout: int = 30) -> str:
             except UnicodeDecodeError:
                 return conteudo.decode('latin-1')
         except urllib.error.HTTPError as e:
+            if e.code == 403:
+                raise Bloqueado(f'HTTP 403') from e
             if e.code not in (429, 500, 502, 503, 504) or tentativa == TENTATIVAS:
                 raise
             erro = f'HTTP {e.code}'
         except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+            motivo = getattr(e, 'reason', e)
+            if isinstance(e, (ConnectionResetError, http.client.RemoteDisconnected)) or isinstance(
+                    motivo, (ConnectionResetError, http.client.RemoteDisconnected)):
+                raise Bloqueado(f'conexão derrubada ({motivo})') from e
             if tentativa == TENTATIVAS:
                 raise
-            erro = str(getattr(e, 'reason', e))
+            erro = str(motivo)
         espera = ESPERA_INICIAL_S * 3 ** (tentativa - 1)
         log(f'  {pagina}: falha ao baixar ({erro}); nova tentativa em {espera}s')
         time.sleep(espera)
@@ -869,6 +882,11 @@ def main() -> int:
             time.sleep(PAUSA_ENTRE_PAGINAS_S)
         try:
             registros = coletar(pagina, args.html)
+        except Bloqueado as e:
+            erros += args.paginas[n:]
+            log(f'{pagina}: BLOQUEADO pelo site ({e}); as {len(args.paginas) - n} páginas restantes '
+                'ficam para a próxima coleta')
+            break
         except Exception as e:  # uma página com problema não impede as demais
             erros.append(pagina)
             log(f'{pagina}: ERRO {type(e).__name__}: {e}')
