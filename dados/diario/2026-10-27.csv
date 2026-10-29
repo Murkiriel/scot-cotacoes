@@ -1470,6 +1470,42 @@ data,grupo,categoria,produto,uf,praca,indicador,unidade,valor,tendencia,coletado
 2026-10-27,Reposição,Macho cruzamento industrial,Desmama (8 A 10M 225 kg),PR,PR,R$/cab,R$/cab,3945.06,,2026-10-28T13:42:26-03:00,Coleta própria
 2026-10-27,Reposição,Macho cruzamento industrial,Desmama (8 A 10M 225 kg),PR,PR,R$/kg,R$/kg,17.53,,2026-10-28T13:42:26-03:00,Coleta própria
 2026-10-27,Reposição,Macho cruzamento industrial,Desmama (8 A 10M 225 kg),PR,PR,Relação de troca,@ de boi gordo,10.12,,2026-10-28T13:42:26-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Out/26,Boi gordo (B3),,,Ajuste anterior,R$/@,384.55,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Out/26,Boi gordo (B3),,,Ajuste,R$/@,385.15,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Out/26,Boi gordo (B3),,,Contratos negociados,contratos,1380.0,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Out/26,Boi gordo (B3),,,Variação,R$/@,0.6,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Out/26,Boi gordo (B3),,,Câmbio,R$/US$,5.18,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Out/26,Boi gordo (B3),,,US$ à vista,US$/@,74.34,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Nov/26,Boi gordo (B3),,,Ajuste anterior,R$/@,397.15,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Nov/26,Boi gordo (B3),,,Ajuste,R$/@,401.6,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Nov/26,Boi gordo (B3),,,Contratos negociados,contratos,4268.0,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Nov/26,Boi gordo (B3),,,Variação,R$/@,4.45,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Nov/26,Boi gordo (B3),,,Câmbio,R$/US$,5.33,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Nov/26,Boi gordo (B3),,,US$ à vista,US$/@,75.28,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Dez/26,Boi gordo (B3),,,Ajuste anterior,R$/@,397.05,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Dez/26,Boi gordo (B3),,,Ajuste,R$/@,401.75,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Dez/26,Boi gordo (B3),,,Contratos negociados,contratos,4294.0,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Dez/26,Boi gordo (B3),,,Variação,R$/@,4.7,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Dez/26,Boi gordo (B3),,,Câmbio,R$/US$,5.35,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Dez/26,Boi gordo (B3),,,US$ à vista,US$/@,75.09,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Jan/27,Boi gordo (B3),,,Ajuste anterior,R$/@,396.95,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Jan/27,Boi gordo (B3),,,Ajuste,R$/@,400.25,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Jan/27,Boi gordo (B3),,,Contratos negociados,contratos,2306.0,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Jan/27,Boi gordo (B3),,,Variação,R$/@,3.3,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Jan/27,Boi gordo (B3),,,Câmbio,R$/US$,5.38,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Jan/27,Boi gordo (B3),,,US$ à vista,US$/@,74.4,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Fev/27,Boi gordo (B3),,,Ajuste anterior,R$/@,396.3,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Fev/27,Boi gordo (B3),,,Ajuste,R$/@,400.15,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Fev/27,Boi gordo (B3),,,Contratos negociados,contratos,304.0,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Fev/27,Boi gordo (B3),,,Variação,R$/@,3.85,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Fev/27,Boi gordo (B3),,,Câmbio,R$/US$,5.41,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Fev/27,Boi gordo (B3),,,US$ à vista,US$/@,73.96,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Mar/27,Boi gordo (B3),,,Ajuste anterior,R$/@,395.8,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Mar/27,Boi gordo (B3),,,Ajuste,R$/@,399.0,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Mar/27,Boi gordo (B3),,,Contratos negociados,contratos,188.0,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Mar/27,Boi gordo (B3),,,Variação,R$/@,3.2,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Mar/27,Boi gordo (B3),,,Câmbio,R$/US$,5.44,,2026-10-29T13:58:19-03:00,Coleta própria
+2026-10-27,Mercado futuro do boi,Mar/27,Boi gordo (B3),,,US$ à vista,US$/@,73.3,,2026-10-29T13:58:19-03:00,Coleta própria
 2026-10-27,Milho,,Milho,PR,Paranaguá,Compra,R$/saca 60 kg,62.0,,2026-10-28T13:42:26-03:00,Coleta própria
 2026-10-27,Milho,,Milho,PR,Campo Mourão,Compra,R$/saca 60 kg,55.0,,2026-10-28T13:42:26-03:00,Coleta própria
 2026-10-27,Milho,,Milho,PR,Cascavel,Compra,R$/saca 60 kg,57.0,,2026-10-28T13:42:26-03:00,Coleta própria
